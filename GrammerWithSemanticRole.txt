@@ -1,0 +1,69 @@
+P:: void main ( ) { STL } _
+STL:: ST STL' _
+STL':: ! _
+STL':: ST STL' _
+ST:: IFST _
+ST:: WST _
+ST:: DWST _
+ST:: FST _
+ST:: AST _
+ST:: SWST _
+ST:: DCL _
+ST:: SINGLE _
+SINGLE:: SINGLE' @inc-dec id ; _
+SINGLE':: @inc ++ _
+SINGLE':: @dec -- _
+AST:: @push id AST' _
+AST':: = E @Assign ; _
+AST':: [ E ] = E ; _
+AST':: SINGLE' ; _
+IFST:: if ( BE ) { STL } IFST' _
+IFST':: !  _
+IFST':: else { STL } _
+WST:: while ( BE ) { STL } _
+DWST:: do DWST' _
+DWST':: ST while ( BE ) ; _
+DWST':: { STL } while ( BE ) ; _
+FST:: for ( SAST ; BE ; IDST ) { STL } _
+SAST:: TYPE @push id = num _
+SAST:: @push id = num _
+IDST:: @push id IDST' _
+IDST':: ++ _
+IDST':: -- _
+SWST:: switch ( @push id @switch_jmp ) { CASE @switch } _
+CASE:: case @push num : @push_pc ST BRST @switch_jumpOut CASE' _
+CASE':: case @push num : @push_pc ST BRST @switch_jumpOut CASE' _
+CASE':: default : @push_pc ST @switch_jumpOut _
+BRST:: break ; _
+BRST:: ! _
+TYPE:: int _
+TYPE:: float _
+TYPE:: char _
+TYPE:: bool _
+DCL:: @push TYPE S @push id DCL' _
+S:: @isPointer * _
+S:: ! _
+DCL':: @CDesc , S @push id DCL' _
+DCL':: @CDesc ; @pop _
+DCL':: = DCL" _
+DCL":: @AssignDesc num ; @pop _
+DCL":: { num DCL2 _
+DCL':: [ num ] DCL' _
+DCL2:: , num DCL2 _
+DCL2:: } ; @pop _
+E:: T E' _
+E':: + T @add E' _
+E':: - T @sub E' _
+E':: ! _
+T:: F T' _
+T':: * F @mult T' _
+T':: / F @div T' _
+T':: % F @mode T' _
+T':: ! _
+F:: @push id F' _
+F':: ! _
+F':: [ E ] _
+F:: num _
+F:: ( F'' _
+F'':: E ) _
+F'':: - num ) _

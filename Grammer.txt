@@ -1,0 +1,69 @@
+P:: void main ( ) { STL } _
+STL:: ST STL' _
+STL':: ! _
+STL':: ST STL' _
+ST:: IFST _
+ST:: WST _
+ST:: DWST _
+ST:: FST _
+ST:: AST _
+ST:: SWST _
+ST:: DCL _
+ST:: SINGLE _
+SINGLE:: SINGLE' id ; _
+SINGLE':: ++ _
+SINGLE':: -- _
+AST:: id AST' _
+AST':: = num ; _
+AST':: [ E ] = E ; _
+AST':: SINGLE' ; _
+IFST:: if ( BE ) { STL } IFST' _
+IFST':: !  _
+IFST':: else { STL } _
+WST:: while ( BE ) { STL } _
+DWST:: do DWST' _
+DWST':: ST while ( BE ) ; _
+DWST':: { STL } while ( BE ) ; _
+FST:: for ( SAST ; BE ; IDST ) { STL } _
+SAST:: TYPE id = num _
+SAST:: id = num _
+IDST:: id IDST' _
+IDST':: ++ _
+IDST':: -- _
+SWST:: switch ( id ) { CASE } _
+CASE:: case num : ST BRST CASE' _
+CASE':: case num : ST BRST CASE' _
+CASE':: default : ST _
+BRST:: break ; _
+BRST:: ! _
+TYPE:: int _
+TYPE:: float _
+TYPE:: char _
+TYPE:: bool _
+DCL:: TYPE S id DCL' _
+S:: * _
+S:: ! _
+DCL':: , S id DCL' _
+DCL':: ; _
+DCL':: = DCL" _
+DCL":: num ; _
+DCL":: { num DCL2 _
+DCL':: [ num ] DCL' _
+DCL2:: , num DCL2 _
+DCL2:: } ; _
+E:: T E' _
+E':: + T E' _
+E':: - T E' _
+E':: ! _
+T:: F T' _
+T':: * F T' _
+T':: / F T' _
+T':: % F T' _
+T':: ! _
+F:: id F' _
+F':: ! _
+F':: [ E ] _
+F:: num _
+F:: ( F'' _
+F'':: E ) _
+F'':: - num ) _
